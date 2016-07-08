@@ -24,7 +24,7 @@ This document assumes that the subscriber is not colluding with the attacker who
 | | | A One-Time Password device is stolen. |
 | | | A look-up secret authenticator is stolen. |
 | | | A cell phone is stolen. |
-| Duplication | The Subscriber’s authenticator has been copied with or without their knowledge. | Passwords written on paper are disclosed.
+| Duplication | The subscriber’s authenticator has been copied with or without their knowledge. | Passwords written on paper are disclosed.
 | | | Passwords stored in an electronic file are copied. |
 | | | Software PKI authenticator (private key) copied. |
 | | | Look-up secret authenticator copied. |
@@ -34,13 +34,16 @@ This document assumes that the subscriber is not colluding with the attacker who
 | Offline cracking | The authenticator is exposed using analytical methods outside the authentication mechanism. | A software PKI authenticator is subjected to dictionary attack to identify the correct password to use to decrypt the private key. |
 | Side channel attack | The authenticator secret is exposed using physical characteristics of the authenticator | A key is extracted by differential power analysis on a hardware cryptographic authenticator. |
 | | | A cryptographic authenticator secret is extracted by analysis of the response time of the authenticator over a number of attempts. |
-| Phishing or pharming | The authenticator output is captured by fooling the subscriber into thinking the attacker is a Verifier or RP. | A password is revealed by subscriber to a website impersonating the verifier.
+| Phishing or pharming | The authenticator output is captured by fooling the subscriber into thinking the attacker is a verifier or RP. | A password is revealed by subscriber to a website impersonating the verifier.
 | | | A memorized secret is revealed by a bank subscriber in response to an email inquiry from a phisher pretending to represent the bank. |
 | | | A memorized secret is revealed by the subscriber at a bogus verifier website reached through DNS spoofing.
-| Social engineering | The attacker establishes a level of trust with a Subscriber in order to convince the Subscriber to reveal his or her authenticator secret or authenticator output. | A memorized secret is revealed by the Subscriber to an officemate asking for the password on behalf of the subscriber’s boss. |
+| Social engineering | The attacker establishes a level of trust with a subscriber in order to convince the subscriber to reveal his or her authenticator secret or authenticator output. | A memorized secret is revealed by the subscriber to an officemate asking for the password on behalf of the subscriber’s boss. |
 | | | A memorized secret is revealed by a subscriber in a telephone inquiry from an attacker masquerading as a system administrator. |
 | Online guessing | The attacker connects to the verifier online and attempts to guess a valid authenticator output in the context of that verifier. | Online dictionary attacks are used to guess memorized secrets. |
 | | | Online guessing is used to guess authenticator outputs for a one-time password device registered to a legitimate claimant. |
+| Endpoint compromise | Malicious code on the endpoint proxies remote access to a connected authenticator without user consent | A cryptographic authenticator connected to the endpoint is used to authenticate remote attackers. |
+| | Malicious code on the endpoint causes authentication to other than the intended verifier | Authentication is performed on behalf of an attacker rather than the subscriber.
+| | Malicious code on the endpoint compromises a multi-factor software cryptographic authenticator | Malware proxies or exports authenticator keys from the device.
 
 
 ### 8.2. Threat Mitigation Strategies
@@ -63,6 +66,9 @@ Related mechanisms that assist in mitigating the threats identified above are su
 | Phishing or pharming | Use authenticators with dynamic outputs where knowledge of one output does not assist in deriving a subsequent output.
 | Social engineering | Use authenticators with dynamic outputs where knowledge of one output does not assist in deriving a subsequent output.
 | Online guessing | Use authenticators that generate high entropy output.
+| Endpoint compromise | Use hardware authenticators that require physical action by the subscriber.
+| | Provide secure display of identity of verifier and relying party.
+| | Maintain software-based keys in restricted-access storage such as keychain.
 
 
 There are several other strategies that may be applied to mitigate the threats described in Table 5:
@@ -85,4 +91,4 @@ The weak point in many authentication mechanisms is the process followed when a 
 
 In order to maintain the integrity of the authentication factors, it is essential that it not be possible to leverage an authentication involving one factor to obtain an authenticator of a different factor. For example, a memorized secret must not be usable to obtain a new list of look-up secrets.
 
-Subscribers should be encouraged to maintain at least two valid authenticators of each factor they will be using. For example, a subscriber that usually uses a one-time OTP device as a physical authenticator should also be issued a number of look-up secret tokens, or should register a device for out-of-band authentication, in case the physical authenticator is lost, stolen, or damaged.
+Subscribers should be encouraged to maintain at least two valid authenticators of each factor they will be using. For example, a subscriber that usually uses a one-time OTP device as a physical authenticator should also be issued a number of look-up secret authenticators, or should register a device for out-of-band authentication, in case the physical authenticator is lost, stolen, or damaged.
